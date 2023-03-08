@@ -35,8 +35,9 @@ func (t *textDataController) CreateTextData(c *gin.Context) {
 
 func (t *textDataController) GetTextData(c *gin.Context) {
 	id := c.Param("id")
+	privateKey := c.Query("privateKey")
 
-	data := t.service.GetTextData(id)
+	data := t.service.GetTextData(id, privateKey)
 
 	c.IndentedJSON(http.StatusCreated, data)
 }

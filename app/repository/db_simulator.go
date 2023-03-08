@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"strconv"
 	datastruct "zcelero/app/datastruct"
 )
@@ -24,7 +23,6 @@ func (d *dbSimulator) AddData(data datastruct.TextData) datastruct.TextData {
 	id := len(tableValues) + 1
 	data.Id = strconv.Itoa(id)
 	tableValues = append(tableValues, data)
-	fmt.Println(data)
 	return data
 }
 

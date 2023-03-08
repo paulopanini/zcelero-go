@@ -10,7 +10,8 @@ import (
 func main() {
 
 	db := repository.NewDBSimulator()
-	textService := service.NewTextService(db)
+	encryptionService := service.NewEncryptionService()
+	textService := service.NewTextService(db, encryptionService)
 
 	textController := controller.NewTextDataController(textService)
 
