@@ -9,7 +9,7 @@ import (
 
 type TextService interface {
 	CreateTextData(data model.TextData) model.TextData
-	GetTextData(id int) model.TextData
+	GetTextData(id string) model.TextData
 	GetAllData() []model.TextData
 }
 
@@ -39,13 +39,18 @@ func (t *textService) CreateTextData(data model.TextData) model.TextData {
 		Encryption: dbData.Encryption,
 		KeySize:    dbData.KeySize,
 	}
-	fmt.Println(returnData)
 	return returnData
 }
 
-func (t *textService) GetTextData(id int) model.TextData {
-	fmt.Println("Now i'm here")
-	return model.TextData{}
+func (t *textService) GetTextData(id string) model.TextData {
+	dbData := t.db.GetDataById(id)
+	returnData := model.TextData{
+		ID:         dbData.Id,
+		Data:       dbData.Text,
+		Encryption: dbData.Encryption,
+		KeySize:    dbData.KeySize,
+	}
+	return returnData
 }
 
 func (t *textService) GetAllData() []model.TextData {

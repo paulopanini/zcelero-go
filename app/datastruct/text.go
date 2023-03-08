@@ -1,7 +1,7 @@
 package datastruct
 
 type TextData struct {
-	Id         int
+	Id         string
 	Text       string
 	Encryption bool
 	KeySize    uint

@@ -2,12 +2,13 @@ package repository
 
 import (
 	"fmt"
+	"strconv"
 	datastruct "zcelero/app/datastruct"
 )
 
 type DBSimulator interface {
 	AddData(data datastruct.TextData) datastruct.TextData
-	GetDataById(id int) datastruct.TextData
+	GetDataById(id string) datastruct.TextData
 	GetAllData() []datastruct.TextData
 }
 
@@ -21,13 +22,13 @@ var tableValues []datastruct.TextData
 
 func (d *dbSimulator) AddData(data datastruct.TextData) datastruct.TextData {
 	id := len(tableValues) + 1
-	data.Id = id
+	data.Id = strconv.Itoa(id)
 	tableValues = append(tableValues, data)
 	fmt.Println(data)
 	return data
 }
 
-func (d *dbSimulator) GetDataById(id int) datastruct.TextData {
+func (d *dbSimulator) GetDataById(id string) datastruct.TextData {
 	for _, row := range tableValues {
 		if row.Id == id {
 			return row

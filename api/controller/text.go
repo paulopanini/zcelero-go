@@ -34,12 +34,11 @@ func (t *textDataController) CreateTextData(c *gin.Context) {
 }
 
 func (t *textDataController) GetTextData(c *gin.Context) {
-	var newTextData model.TextData
-	if err := c.BindJSON(&newTextData); err != nil {
-		return
-	}
+	id := c.Param("id")
 
-	c.IndentedJSON(http.StatusCreated, newTextData)
+	data := t.service.GetTextData(id)
+
+	c.IndentedJSON(http.StatusCreated, data)
 }
 
 func (t *textDataController) GetAllData(c *gin.Context) {
