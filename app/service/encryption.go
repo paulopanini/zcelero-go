@@ -8,7 +8,6 @@ import (
 	b64 "encoding/base64"
 	"encoding/pem"
 	"errors"
-	"fmt"
 )
 
 type EncryptionService interface {
@@ -34,7 +33,6 @@ func (e *encryptionService) EncryptData(data string, keySize uint) (string, stri
 		[]byte(data),
 		nil)
 	if err != nil {
-		fmt.Println(err)
 		panic(err)
 	}
 
@@ -66,12 +64,8 @@ func ExportRsaPrivateKeyAsPemStr(privkey *rsa.PrivateKey) string {
 }
 
 func ParseRsaPrivateKeyFromPemStr(privPEM string) (*rsa.PrivateKey, error) {
-	fmt.Println(privPEM)
-	fmt.Println("####################################")
-	block, erro := pem.Decode([]byte(privPEM))
-	fmt.Println(block)
+	block, _ := pem.Decode([]byte(privPEM))
 	if block == nil {
-		println(string(erro))
 		return nil, errors.New("failed to parse PEM block containing the key")
 	}
 
